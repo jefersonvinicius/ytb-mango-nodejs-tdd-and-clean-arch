@@ -6,5 +6,8 @@
   "env": {
     "jest": true,
     "node": true
+  },
+  "rules": {
+    "no-unused-vars": ["warn", {"argsIgnorePattern": "^_", "varsIgnorePattern": "^_"}]
   }
 }
