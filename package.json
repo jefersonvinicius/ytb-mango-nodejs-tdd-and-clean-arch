@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch --silent"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC",
@@ -12,5 +12,8 @@
     "@types/jest": "^26.0.24",
     "eslint": "^7.32.0",
     "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "validator": "^13.6.0"
   }
 }
