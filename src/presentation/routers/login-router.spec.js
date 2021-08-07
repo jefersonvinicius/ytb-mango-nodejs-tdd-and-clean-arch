@@ -1,5 +1,5 @@
-const InvalidParamError = require('../errors/invalid-param-error');
-const MissingParamError = require('../errors/missing-param-error');
+const InvalidParamError = require('../../utils/errors/invalid-param-error');
+const MissingParamError = require('../../utils/errors/missing-param-error');
 const ServerError = require('../errors/server-error');
 const UnauthorizedError = require('../errors/unauthorized-error');
 const LoginRouter = require('./login-router');
