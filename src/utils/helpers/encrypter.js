@@ -1,5 +1,7 @@
+const bcrypt = require('bcrypt');
+
 module.exports = class Encrypter {
-  async compare(password, hashedPassword) {
-    return true;
+  async compare(value, hash) {
+    return await bcrypt.compare(value, hash);
   }
 };
