@@ -1,7 +1,7 @@
 module.exports = {
   isValid: true,
-  value: undefined,
-  hash: undefined,
+  value: '',
+  hash: '',
   async compare(value, hash) {
     this.value = value;
     this.hash = hash;
