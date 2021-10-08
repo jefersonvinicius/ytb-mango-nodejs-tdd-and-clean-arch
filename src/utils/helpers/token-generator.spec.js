@@ -32,4 +32,10 @@ describe('Token Generator', () => {
       new TokenGenerator();
     }).toThrow(new MissingParamError('secret'));
   });
+
+  it('should throw if id isn"t provided', async () => {
+    const sut = makeSut();
+    const promise = sut.generate();
+    await expect(promise).rejects.toThrow(new MissingParamError('id'));
+  });
 });

@@ -8,6 +8,7 @@ module.exports = class TokenGenerator {
   }
 
   async generate(id) {
+    if (!id) throw new MissingParamError('id');
     return jwt.sign(id, this.secret);
   }
 };
