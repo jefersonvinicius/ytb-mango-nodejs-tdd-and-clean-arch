@@ -14,4 +14,11 @@ describe('Token Generator', () => {
     const token = await sut.generate('any_id');
     expect(token).toBe(jsonwebtoken.token);
   });
+
+  it('should call JWT with correct values', async () => {
+    const sut = new TokenGenerator('secret');
+    await sut.generate('any_id');
+    expect(jsonwebtoken.id).toBe('any_id');
+    expect(jsonwebtoken.secret).toBe('secret');
+  });
 });
