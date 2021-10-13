@@ -40,11 +40,19 @@ describe('LoadUserByEmail Repository', () => {
 
   it('should returns an user if user is found', async () => {
     const { sut, userModel } = makeSut();
-    await userModel.insertOne({
+
+    const insertion = await userModel.insertOne({
       email: 'any@gmail.com',
+      name: 'any_name',
+      password: 'hashed',
     });
 
     const user = await sut.load('any@gmail.com');
-    expect(user.email).toBe('any@gmail.com');
+
+    expect(user).toMatchObject({
+      _id: insertion.insertedId,
+      name: 'any_name',
+      password: 'hashed',
+    });
   });
 });
