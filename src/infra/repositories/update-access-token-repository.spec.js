@@ -10,6 +10,12 @@ class UpdateAccessTokenRepository {
   }
 }
 
+function createSut() {
+  const userModel = db.collection('users');
+  const sut = new UpdateAccessTokenRepository(userModel);
+  return { sut, userModel };
+}
+
 let db;
 
 describe('UpdateAccessToken Repository', () => {
@@ -27,13 +33,12 @@ describe('UpdateAccessToken Repository', () => {
   });
 
   it('should update the user with the given accessToken', async () => {
-    const userModel = db.collection('users');
+    const { sut, userModel } = createSut();
     const insertion = await userModel.insertOne({
       email: 'any@gmail.com',
       name: 'any_name',
       password: 'hashed',
     });
-    const sut = new UpdateAccessTokenRepository(userModel);
 
     await sut.update(insertion.insertedId, 'valid_token');
 
