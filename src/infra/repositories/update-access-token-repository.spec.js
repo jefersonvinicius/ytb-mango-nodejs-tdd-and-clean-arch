@@ -40,4 +40,18 @@ describe('UpdateAccessToken Repository', () => {
     const updatedUser = await userModel.findOne({ _id: insertion.insertedId });
     expect(updatedUser.accessToken).toBe('valid_token');
   });
+
+  it('should throw an error if no userModel is provided', async () => {
+    const userModel = db.collection('users');
+    const insertion = await userModel.insertOne({
+      email: 'any@gmail.com',
+      name: 'any_name',
+      password: 'hashed',
+    });
+
+    const sut = new UpdateAccessTokenRepository();
+
+    const promise = sut.update(insertion.insertedId, 'valid_token');
+    await expect(promise).rejects.toThrow();
+  });
 });
