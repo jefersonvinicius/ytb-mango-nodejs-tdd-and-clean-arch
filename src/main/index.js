@@ -1,5 +1,4 @@
-const express = require('express');
-const app = express();
+const app = require('./app');
 
 app.listen(5959, () => {
   console.log('Server Running');

@@ -13,7 +13,8 @@
     "@shelf/jest-mongodb": "^2.1.0",
     "@types/jest": "^26.0.24",
     "eslint": "^7.32.0",
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "supertest": "^6.1.6"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
