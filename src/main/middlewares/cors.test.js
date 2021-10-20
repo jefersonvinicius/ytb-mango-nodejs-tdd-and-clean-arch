@@ -5,7 +5,7 @@ const request = supertest(app);
 
 describe('CORS middleware', () => {
   it('should enable CORS header', async () => {
-    app.get('/test', (req, res) => res.send('test'));
+    app.get('/test', (req, res) => res.send(''));
 
     const response = await request.get('/test').send();
     expect(response.headers['access-control-allow-origin']).toBe('*');
