@@ -20,7 +20,7 @@ module.exports = {
   },
 
   async getDB() {
-    if (!this.client || !this.client.topology.isConnected()) {
+    if (!this.client) {
       await this.connect(this.uri, this.dbName);
     }
     return this.db;

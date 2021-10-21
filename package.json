@@ -5,7 +5,8 @@
   "main": "src/main/index.js",
   "scripts": {
     "start": "node src/main/index.js",
-    "test": "jest --watch --runInBand"
+    "test": "jest --runInBand",
+    "test:watch": "yarn test --watch"
   },
   "author": "",
   "license": "ISC",

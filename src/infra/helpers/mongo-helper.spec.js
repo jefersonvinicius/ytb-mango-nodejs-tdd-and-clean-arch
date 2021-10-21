@@ -12,6 +12,7 @@ describe('MongoHelper', () => {
     await sut.disconnect();
     expect(sut.db).toBeNull();
 
-    await expect(sut.getDB()).resolves.toBeTruthy();
+    const db = await sut.getDB();
+    expect(db).toBe(sut.db);
   });
 });
