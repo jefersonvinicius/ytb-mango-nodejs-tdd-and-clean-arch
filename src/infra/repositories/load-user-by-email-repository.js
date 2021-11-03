@@ -5,8 +5,8 @@ module.exports = class LoadUserByEmailRepository {
   async load(email) {
     if (!email) throw new MissingParamError('email');
 
-    const db = await MongoHelper.getDB();
+    const userModel = await MongoHelper.getCollection('users');
 
-    return await db.collection('users').findOne({ email });
+    return await userModel.findOne({ email });
   }
 };

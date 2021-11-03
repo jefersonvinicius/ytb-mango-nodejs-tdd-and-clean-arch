@@ -5,14 +5,14 @@ describe('MongoHelper', () => {
     await sut.disconnect();
   });
 
-  it('should getDb() return a value even when database is disconnected', async () => {
+  it('should connect when getCollection() is called even when database is disconnected', async () => {
     await sut.connect(global.__MONGO_URI__);
     expect(sut.db).toBeTruthy();
 
     await sut.disconnect();
     expect(sut.db).toBeNull();
 
-    const db = await sut.getDB();
-    expect(db).toBe(sut.db);
+    await sut.getCollection('users');
+    expect(sut.db).toBeDefined();
   });
 });

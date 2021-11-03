@@ -7,18 +7,17 @@ function makeSut() {
   return { sut };
 }
 
-let db;
+let userModel;
 
 describe('UpdateAccessToken Repository', () => {
   let userIdInserted;
 
   beforeAll(async () => {
     await MongoHelper.connect(global.__MONGO_URI__);
-    db = await MongoHelper.getDB();
+    userModel = await MongoHelper.getCollection('users');
   });
 
   beforeEach(async () => {
-    const userModel = db.collection('users');
     await userModel.deleteMany();
     const insertion = await userModel.insertOne({
       email: 'any@gmail.com',
@@ -37,7 +36,7 @@ describe('UpdateAccessToken Repository', () => {
 
     await sut.update(userIdInserted, 'valid_token');
 
-    const updatedUser = await db.collection('users').findOne({ _id: userIdInserted });
+    const updatedUser = await userModel.findOne({ _id: userIdInserted });
     expect(updatedUser.accessToken).toBe('valid_token');
   });
 
