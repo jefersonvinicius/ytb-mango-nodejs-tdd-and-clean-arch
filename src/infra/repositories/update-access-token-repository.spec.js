@@ -3,9 +3,8 @@ const MongoHelper = require('../helpers/mongo-helper');
 const UpdateAccessTokenRepository = require('./update-access-token-repository');
 
 function makeSut() {
-  const userModel = db.collection('users');
-  const sut = new UpdateAccessTokenRepository(userModel);
-  return { sut, userModel };
+  const sut = new UpdateAccessTokenRepository();
+  return { sut };
 }
 
 let db;
@@ -34,19 +33,12 @@ describe('UpdateAccessToken Repository', () => {
   });
 
   it('should update the user with the given accessToken', async () => {
-    const { sut, userModel } = makeSut();
+    const { sut } = makeSut();
 
     await sut.update(userIdInserted, 'valid_token');
 
-    const updatedUser = await userModel.findOne({ _id: userIdInserted });
+    const updatedUser = await db.collection('users').findOne({ _id: userIdInserted });
     expect(updatedUser.accessToken).toBe('valid_token');
-  });
-
-  it('should throw an error if no userModel is provided', async () => {
-    const sut = new UpdateAccessTokenRepository();
-
-    const promise = sut.update(userIdInserted, 'valid_token');
-    await expect(promise).rejects.toThrow();
   });
 
   it('should throw an error if no params are provided', async () => {
