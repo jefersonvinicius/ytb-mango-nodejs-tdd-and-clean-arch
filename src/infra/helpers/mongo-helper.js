@@ -6,11 +6,10 @@ module.exports = {
   dbName: undefined,
   db: null,
 
-  async connect(uri, dbName) {
+  async connect(uri) {
     this.uri = uri;
-    this.dbName = dbName;
     this.client = await MongoClient.connect(uri);
-    this.db = this.client.db(dbName);
+    this.db = this.client.db();
   },
 
   async disconnect() {
@@ -21,7 +20,7 @@ module.exports = {
 
   async getCollection(name) {
     if (!this.client) {
-      await this.connect(this.uri, this.dbName);
+      await this.connect(this.uri);
     }
     return this.db.collection(name);
   },
