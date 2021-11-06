@@ -33,7 +33,7 @@ function makeLoadUserByEmailRepository() {
   }
   const loadUserByEmailRepositorySpy = new LoadUserByEmailRepository();
   loadUserByEmailRepositorySpy.user = {
-    id: 'any_id',
+    _id: 'any_id',
     password: 'hashed_password',
   };
   return loadUserByEmailRepositorySpy;
@@ -151,7 +151,7 @@ describe('Auth UseCase', () => {
   it('Should call TokenGenerator with correct userId', async () => {
     const { sut, loadUserByEmailRepositorySpy, tokenGeneratorSpy } = makeSut();
     await sut.auth('valid@gmail.com', 'valid_password');
-    expect(tokenGeneratorSpy.userId).toBe(loadUserByEmailRepositorySpy.user.id);
+    expect(tokenGeneratorSpy.userId).toBe(loadUserByEmailRepositorySpy.user._id);
   });
 
   it('Should TokenGenerator returns accessToken', async () => {
