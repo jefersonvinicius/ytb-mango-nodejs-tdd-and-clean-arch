@@ -26,12 +26,21 @@ describe('Login Routes', () => {
       email: 'valid_email@gmail.com',
       password: bcrypt.hashSync('hashed_password', 10),
     });
+    const response = await request.post('/api/login').send({
+      email: 'valid_email@gmail.com',
+      password: 'hashed_password',
+    });
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('accessToken', expect.any(String));
+  });
+
+  it('should return 401 when invalid credentials are provided', async () => {
     await request
       .post('/api/login')
       .send({
         email: 'valid_email@gmail.com',
         password: 'hashed_password',
       })
-      .expect(200);
+      .expect(401);
   });
 });
