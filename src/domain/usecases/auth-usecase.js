@@ -18,7 +18,6 @@ module.exports = class AuthUseCase {
     const isValid = await this.encrypter.compare(password, user.password);
     if (!isValid) return null;
 
-    console.log(user);
     const accessToken = await this.tokenGenerator.generate(user._id);
     await this.updateAccessTokenRepository.update(user._id, accessToken);
 

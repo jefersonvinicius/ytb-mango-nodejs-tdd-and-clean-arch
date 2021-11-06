@@ -1,16 +1,11 @@
 const supertest = require('supertest');
 const MongoHelper = require('../../infra/helpers/mongo-helper');
+const bcrypt = require('bcrypt');
 const app = require('../app');
 
 const request = supertest(app);
 
 describe('Login Routes', () => {
-  beforeAll(() => {
-    jest.unmock('bcrypt');
-    jest.unmock('jsonwebtoken');
-    jest.unmock('validator');
-  });
-
   let userModel;
 
   beforeAll(async () => {
@@ -29,7 +24,7 @@ describe('Login Routes', () => {
   it('should return 200 when valid credentials are provided', async () => {
     await userModel.insertOne({
       email: 'valid_email@gmail.com',
-      password: 'hashed_password',
+      password: bcrypt.hashSync('hashed_password', 10),
     });
     await request
       .post('/api/login')
